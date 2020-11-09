@@ -46,9 +46,17 @@ public class ChannelController {
 		return channelRepository.findById(id);
 	}
 
-	@DeleteMapping("/getChannel/{id}")
-	public Optional<Channel> getChannelById1(@PathVariable int id) {
+	@GetMapping("/getChannelByName/{name}")
+	public Optional<Channel> getChannelByName(@PathVariable String name) {
 
-		return channelRepository.findById(id);
+		return channelRepository.findByChannelName(name);
+	}
+
+	@DeleteMapping("/deleteChannel/{id}")
+	public String getChannelById1(@PathVariable("id") int id) {
+		Channel channel = new Channel();
+		channel.setChannelId(id);
+		channelRepository.delete(channel);
+		return "Deleted Channel with id " + channel.getChannelId();
 	}
 }
